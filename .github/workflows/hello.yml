@@ -43,10 +43,10 @@ jobs:
               --password-stdin
 
       - name: build docker image
-        run:  docker build -t muskaan85/dockerimage:3.0 .
+        run:  docker build -t muskaan85/dockerimage:latest .
 
       - name: push to docker hub
-        run:  docker push muskaan85/dockerimage:3.0
+        run:  docker push muskaan85/dockerimage:latest
 
 
 
