@@ -1,0 +1,19 @@
+# name of the workflow that we see in github actions
+name: github-action-learning
+
+# this workflow execute when some one runs code
+on: [push]
+
+# reside actual work, each job = one task , can have many jobs
+jobs:
+
+  # name of job (can give any name)
+  say-hello:
+    
+    # github-actions provide you a free Ubuntu machine (fresh server, no setup needed)
+    runs-on: ubuntu-latest
+
+    # steps are commands that run one by one from to bottom
+    steps:
+      - name: Print message
+        run: echo "Hello Muskaan, GitHub Actions is working"
