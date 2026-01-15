@@ -1,16 +1,16 @@
 # name of the workflow that we see in github actions
-name: github-action-learning
+name: github-action-learning-multiple-jobs-with-dependency
 
 # this workflow execute when some one runs code
 on: [push]
 
 # reside actual work, each job = one task , can have many jobs
 jobs:
-
   # name of job (can give any name)
-  docker-build:
+  test: 
     
     # github-actions provide you a free Ubuntu machine (fresh server, no setup needed)
+    name: test cases run
     runs-on: ubuntu-latest
 
     # steps are commands that run one by one from to bottom
@@ -28,18 +28,25 @@ jobs:
       - name: Run tests
         run:  pytest
 
+build:
+   name: build docker image
+   runs-on: ubuntu-latest
+   #needs keywords builts dependency on test job, until testcases success,image not built  
+   needs: test
+        
+   steps:
+      - uses: actions/checkout@v4
       - name: Login to DockerHub
         run: |
-          echo "${{ secrets.DOCKER_PWD}}" | docker login \
-            -u "${{ secrets.DOCKER_USERNAME }}" \
-            --password-stdin
+             echo "${{ secrets.DOCKER_PWD}}" | docker login \
+              -u "${{ secrets.DOCKER_USERNAME }}" \
+              --password-stdin
 
       - name: build docker image
-        run:  docker build -t muskaan85/dockerimage:1.0 .
+        run:  docker build -t muskaan85/dockerimage:2.0 .
 
       - name: push to docker hub
-        run:  docker push muskaan85/dockerimage:1.0
-
+        run:  docker push muskaan85/dockerimage:2.0
 
 
 
