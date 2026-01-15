@@ -15,5 +15,26 @@ jobs:
 
     # steps are commands that run one by one from to bottom
     steps:
-      - name: Print message
-        run: echo "Hello Muskaan, GitHub Actions is working"
+
+      # uses keyword specifies that this step will run v4 of the actions/checkout action, download code and alomost needed, without this github can't see files. actions/checkout pulls your code into runner.
+      - uses: actions/checkout@v4
+
+      -name: Python CI
+      -uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      # this runs app.py file
+      - name: Run Python file
+        run:  python app.py
+
+      - name: Install Pytest
+        run:  pip install pytest
+
+      - name: Run tests
+        run:  pytest
+
+
+
+        
+
