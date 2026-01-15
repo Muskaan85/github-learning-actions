@@ -15,8 +15,6 @@ jobs:
 
     # steps are commands that run one by one from to bottom
     steps:
-
-      # uses keyword specifies that this step will run v4 of the actions/checkout action, download code and alomost needed, without this github can't see files. actions/checkout pulls your code into runner.
       - uses: actions/checkout@v4
 
       -name: Python CI
